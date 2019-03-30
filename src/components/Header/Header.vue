@@ -8,7 +8,7 @@
       </div>
       <button>登录</button>
     </div>
-    <div class="header-nav">
+    <div class="header-nav" v-if="isOpen">
       <ul class="header-nav-left" @click="toggleActive">
         <li class="active"><a href="javascript:void(0);">推荐</a></li>
         <li><a href="javascript:void(0);">居家生活</a></li>
@@ -20,13 +20,35 @@
         <li><a href="javascript:void(0);">数码家电</a></li>
         <li><a href="javascript:void(0);">全球特色</a></li>
       </ul>
-      <span class="iconfont icon-arrow header-nav-arrow"></span>
+      <span class="iconfont icon-54 header-nav-arrow" @click="toggleShow"></span>
+    </div>
+    <div class="header-nav-box" v-if="!isOpen">
+      <div class="all-category">
+        <span>全部频道</span>
+        <i class="iconfont icon-53" @click="toggleShow"></i>
+      </div>
+      <ul>
+        <li class="on"><a href="javascript:void(0);">推荐</a></li>
+        <li><a href="javascript:void(0);">居家生活</a></li>
+        <li><a href="javascript:void(0);">服饰鞋包</a></li>
+        <li><a href="javascript:void(0);">美食酒水</a></li>
+        <li><a href="javascript:void(0);">个护清洁</a></li>
+        <li><a href="javascript:void(0);">母婴亲子</a></li>
+        <li><a href="javascript:void(0);">运动旅行</a></li>
+        <li><a href="javascript:void(0);">数码家电</a></li>
+        <li><a href="javascript:void(0);">全球特色</a></li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
   import BScroll from 'better-scroll';
   export default {
+    data () {
+      return {
+        isOpen: true
+      }
+    },
     methods: {
       toggleActive (event) {
         const lis = document.querySelectorAll('li');
@@ -34,6 +56,9 @@
           li.className = '';
         });
         event.target.parentElement.className = 'active';
+      },
+      toggleShow () {
+        this.isOpen = !this.isOpen;
       }
     },
     mounted () {
@@ -50,6 +75,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl"
   .header-container
+    position relative
     height 150px
     width 100%
     .header-search-login
@@ -120,4 +146,44 @@
         text-align center
         line-height 60px
         background-color #fff
+    .header-nav-box
+      position absolute
+      left 0
+      top 90px
+      width 100%
+      z-index 10
+      background-color #fff
+      .all-category
+        display flex
+        justify-content space-between
+        /*position relative*/
+        font-size 30px
+        height 60px
+        line-height 60px
+        margin 0 0 20px
+        text-align center
+        span
+          margin-left 30px
+        i
+          width 100px
+          height 60px
+          font-size 30px
+      ul
+        clearFix()
+        width 100%
+        font-size 24px
+        text-align center
+        box-sizing border-box
+        li
+          float left
+          width 150px
+          height 56px
+          text-align center
+          line-height 56px
+          border-radius 5px
+          margin 0 0 40px 30px
+          background-color #FAFAFA
+          box-sizing border-box
+          &.on
+            border 1px solid $red
 </style>
