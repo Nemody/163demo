@@ -85,7 +85,8 @@
                     '<span class="swiper-pagination-customs"></span>';
                 }
               }
-              return '<span class="swiperPag">' + customPaginationHtml + '</span>';
+//              return '<span class="swiperPag">' + customPaginationHtml + '</span>';
+              return customPaginationHtml;
             }
           }
         });
@@ -104,29 +105,19 @@
       .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets
         width 100%
         height 4px
-        bottom 30px
-        .swiperPag
-          position absolute
-          bottom 30px
-          left 50%
-          width 360px
+        bottom 50px
+        .swiper-pagination-customs
+          width 40px
           height 4px
+          display inline-block
+          margin-right 10px
+          background-color rgba(255, 255, 255, .5)
+        .swiper-pagination-customs-active
+          width 40px
+          height 4px
+          display inline-block
           border-radius 2px
-          margin-left -180px
-          display flex
-          align-items center
-          background-color rgba(255,255,255,.3)
-          .swiper-pagination-customs
-            width 60px
-            height 4px
-            display inline-block
-            margin-right 5px
-          .swiper-pagination-customs-active
-            width 60px
-            height 4px
-            display inline-block
-            border-radius 2px
-            background-color $red
+          background-color $red
     .wangyi-grow
       display flex
       justify-content space-around
