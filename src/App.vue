@@ -1,23 +1,24 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <router-view />
   </div>
 </template>
-
 <script>
-export default {
-  name: 'App'
-}
+  import Home from './pages/Home/Home.vue';
+  import Category from './pages/Category/Category.vue';
+  import Recommend from './pages/Recommend/Recommend.vue';
+  import ShopCart from './pages/ShopCart/ShopCart.vue';
+  import Profile from './pages/Profile/Profile.vue';
+  export default {
+    components: {
+      Home,
+      Category,
+      Recommend,
+      ShopCart,
+      Profile
+    }
+  }
 </script>
+<style  lang="stylus" rel="stylesheet/stylus">
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

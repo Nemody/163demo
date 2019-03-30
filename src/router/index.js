@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+/**
+ * 路由器管理模块
+ */
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(Router)
+import routes from './routes';
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+Vue.use(VueRouter);
+
+/* eslint-disable no-new */
+export default new VueRouter({
+  mode: 'hash',
+  routes
 })
