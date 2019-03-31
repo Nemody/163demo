@@ -78,6 +78,7 @@
     position relative
     height 150px
     width 100%
+    background-color #fff
     .header-search-login
       display flex
       justify-content space-around

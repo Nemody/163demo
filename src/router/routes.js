@@ -2,19 +2,29 @@
  * 路由管理模块
  */
 import Home from '../pages/Home/Home.vue';
-import Category from '../pages/Category/Category.vue';
+import CategoryList from '../pages/CategoryList/CategoryList.vue';
 import Recommend from '../pages/Recommend/Recommend.vue';
 import ShopCart from '../pages/ShopCart/ShopCart.vue';
 import Profile from '../pages/Profile/Profile.vue';
-
+import Category from '../pages/CategoryList/Category/Category.vue';
 export default [
   {
     path: '/home',
     component: Home
   },
   {
-    path: '/category',
-    component: Category
+    path: '/categorylist',
+    component: CategoryList,
+    children: [
+      {
+        path: '/categorylist/category',
+        component: Category
+      },
+      {
+        path: '',
+        redirect: '/categorylist/category'
+      }
+    ]
   },
   {
     path: '/recommend',
