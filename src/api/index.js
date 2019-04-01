@@ -3,4 +3,5 @@
  */
 import ajax from './ajax';
 
-export const reqCategoryList = () => ajax('/home');
+export const reqCategoryList = () => ajax('/categorylist');
+export const reqHomeData = () => ajax('/home');

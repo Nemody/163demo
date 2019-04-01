@@ -9,16 +9,11 @@
       <button>登录</button>
     </div>
     <div class="header-nav" v-if="isOpen">
-      <ul class="header-nav-left" @click="toggleActive">
-        <li class="active"><a href="javascript:void(0);">推荐</a></li>
-        <li><a href="javascript:void(0);">居家生活</a></li>
-        <li><a href="javascript:void(0);">服饰鞋包</a></li>
-        <li><a href="javascript:void(0);">美食酒水</a></li>
-        <li><a href="javascript:void(0);">个护清洁</a></li>
-        <li><a href="javascript:void(0);">母婴亲子</a></li>
-        <li><a href="javascript:void(0);">运动旅行</a></li>
-        <li><a href="javascript:void(0);">数码家电</a></li>
-        <li><a href="javascript:void(0);">全球特色</a></li>
+      <ul class="header-nav-left">
+        <li :class="{active: activeIndex === recoIndex}" :data-index="filterCategoryList.length" ref="recoLi" @click="toggleActive()"><a href="javascript:void(0);">推荐</a></li>
+        <li :class="{active: activeIndex === index}" v-for="(category, index) in filterCategoryList" :key="index" @click="toggleActive(index)">
+          <a href="javascript:void(0);">{{category.name}}</a>
+        </li>
       </ul>
       <span class="iconfont icon-54 header-nav-arrow" @click="toggleShow"></span>
     </div>
@@ -28,34 +23,42 @@
         <i class="iconfont icon-53" @click="toggleShow"></i>
       </div>
       <ul>
-        <li class="on"><a href="javascript:void(0);">推荐</a></li>
-        <li><a href="javascript:void(0);">居家生活</a></li>
-        <li><a href="javascript:void(0);">服饰鞋包</a></li>
-        <li><a href="javascript:void(0);">美食酒水</a></li>
-        <li><a href="javascript:void(0);">个护清洁</a></li>
-        <li><a href="javascript:void(0);">母婴亲子</a></li>
-        <li><a href="javascript:void(0);">运动旅行</a></li>
-        <li><a href="javascript:void(0);">数码家电</a></li>
-        <li><a href="javascript:void(0);">全球特色</a></li>
+        <li :class="{on: activeIndex === recoIndex}" :data-index="filterCategoryList.length" ref="recoLi" @click="toggleActive()"><a href="javascript:void(0);">推荐</a></li>
+        <li :class="{on: activeIndex === index}" v-for="(category, index) in filterCategoryList" :key="index" @click="toggleActive(index)">
+          <a href="javascript:void(0);">{{category.name}}</a>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex';
   import BScroll from 'better-scroll';
   export default {
     data () {
       return {
-        isOpen: true
+        isOpen: true,
+        activeIndex: 0,
+        recoIndex: 0
+      }
+    },
+    computed: {
+      ...mapState({
+        categoryList: state => state.categoryList.categoryList
+      }),
+      filterCategoryList () {
+        const newArr = this.categoryList.filter((category, index) => (index + 1) % 5 !== 0);
+        this.activeIndex = newArr.length;
+        return newArr;
       }
     },
     methods: {
-      toggleActive (event) {
-        const lis = document.querySelectorAll('li');
-        Array.from(lis).forEach((li, index) => {
-          li.className = '';
-        });
-        event.target.parentElement.className = 'active';
+      toggleActive (index) {
+        if ((index + 1) && (index + 1) <= this.recoIndex) {
+          this.activeIndex = index;
+        } else {
+          this.activeIndex = this.recoIndex;
+        }
       },
       toggleShow () {
         this.isOpen = !this.isOpen;
@@ -68,6 +71,7 @@
           click: true,
           scrollX: true
         });
+        this.recoIndex = this.$refs.recoLi.getAttribute('data-index') * 1;
       })
     }
   }
@@ -120,9 +124,10 @@
         border 1px solid $red
         background-color #fff
     .header-nav
+      position relative
       width 100%
       height 60px
-      position relative
+      overflow hidden
       .header-nav-left
         width 1650px
         font-size 30px

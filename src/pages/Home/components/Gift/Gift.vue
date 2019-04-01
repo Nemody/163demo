@@ -1,5 +1,5 @@
 <template>
-  <section class="home-gift">
+  <section class="gift-container">
     <p class="name">- 新人专享礼 -</p>
     <div class="gift-box">
       <div class="gift-left">
@@ -29,7 +29,7 @@
   export default {}
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  .home-gift
+  .gift-container
     padding 0 30px
     margin-bottom 30px
     .name

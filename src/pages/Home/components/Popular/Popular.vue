@@ -1,5 +1,5 @@
 <template>
-  <section class="home-popular">
+  <section class="popular-container">
     <p>类目热销榜</p>
     <div class="popular-top">
       <ul>
@@ -62,7 +62,7 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../../common/stylus/mixins.styl";
-  .home-popular
+  .popular-container
     padding 0 20px 20px 30px
     box-sizing border-box
     p

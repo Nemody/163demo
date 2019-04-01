@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <section class="home-manufacturer">
+    <section class="manufacturer-container">
       <div class="manufacturer-header">
         <span>品牌制造商直供</span>
         <span class="more">更多
@@ -30,7 +29,6 @@
         </li>
       </ul>
     </section>
-  </div>
 </template>
 <script>
   export default {
@@ -43,8 +41,8 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../../common/stylus/mixins.styl"
-  .home-manufacturer
-    padding 0 20px
+  .manufacturer-container
+    padding 0 20px 20px 30px
     font-size 30px
     .manufacturer-header
       display flex

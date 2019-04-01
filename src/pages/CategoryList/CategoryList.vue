@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="categoryList-container">
     <div class="searchInput">
       <i class="iconfont icon-search"></i>
       <span class="placeholder">搜索商品，共xxxxx款好物</span>
@@ -26,7 +26,10 @@
       }
     },
     computed: {
-      ...mapState(['categoryList', 'currentIndex']),
+      ...mapState({
+        categoryList: state => state.categoryList.categoryList,
+        currentIndex: state => state.categoryList.currentIndex
+      }),
       filterCategoryList () {
         return this.categoryList.filter((category, index) => (index + 1) % 5 !== 0)
       }
@@ -52,6 +55,8 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl";
+  .categoryList-container
+    padding-bottom 100px
     .searchInput
       height 56px
       width 90%

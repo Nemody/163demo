@@ -25,7 +25,9 @@
       filterCategoryList: Array
     },
     computed: {
-      ...mapState(['currentIndex'])
+      ...mapState({
+        currentIndex: state => state.categoryList.currentIndex
+      })
     },
     mounted () {
       this.categories = this.filterCategoryList[this.currentIndex];

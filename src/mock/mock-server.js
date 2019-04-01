@@ -3,6 +3,7 @@
  */
 import Mock from 'mockjs';
 import categoryList from './categoryList.json';
+import homeData from './homeData.json';
 
-Mock.mock('/home', {code: 0, data: categoryList});
-Mock.mock('/category', {code: 0, data: categoryList});
+Mock.mock('/home', {code: 0, data: homeData});
+Mock.mock('/categorylist', {code: 0, data: categoryList});

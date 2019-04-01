@@ -36,6 +36,7 @@
   export default {
     methods: {
       goto (path) {
+        this.$store.dispatch('updateIndex', 0)
         this.$router.replace(path);
       }
     }

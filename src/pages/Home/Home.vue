@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <Header/>  <!--头部-->
-    <HomeSwiper ref="swiper"/>  <!--轮播图部分-->
+    <Swiper ref="swiper"/>  <!--轮播图部分-->
     <ul class="wangyi-grow">
       <li>
         <i class="grow-icon"></i>
@@ -16,33 +16,49 @@
         <span>48小时快速退款</span>
       </li>
     </ul>
-    <HomeNav />   <!--首页主导航区-->
-    <HomeGift />  <!--首页福利区-->
+    <Nav />   <!--首页主导航区-->
+    <Gift />  <!--首页福利区-->
     <Split />
-    <HomeManufacturer /> <!--首页品牌制造商区-->
+    <Manufacturer /> <!--首页品牌制造商区-->
     <Split />
-    <HomePopular /> <!--首页热销榜单区-->
+    <Popular /> <!--首页热销榜单区-->
     <Split />
+    <Recommend />
+    <Split />
+    <FlashSale />
+    <Split />
+    <NewProducts />
+    <Split />
+    <Classify />
     <Footer />   <!--底部导航区-->
   </div>
 </template>
 <script>
-  import HomeSwiper from './components/HomSwiper/HomeSwiper.vue';
-  import HomeNav from './components/HomeNav/HomeNav.vue';
-  import HomeGift from './components/HomeGift/HomeGift.vue';
-  import HomeManufacturer from './components/HomeManufacturer/HomeManufacturer.vue';
-  import HomePopular from './components/HomePopular/HomePopular.vue';
+  import Swiper from './components/Swiper/Swiper.vue';
+  import Nav from './components/Nav/Nav.vue';
+  import Gift from './components/Gift/Gift.vue';
+  import Manufacturer from './components/Manufacturer/Manufacturer.vue';
+  import Popular from './components/Popular/Popular.vue';
+  import Recommend from './components/Recommend/Recommend.vue';
+  import FlashSale from './components/FlashSale/FlashSale.vue';
+  import NewProducts from './components/NewProducts/NewProducts.vue';
+  import Classify from './components/Classify/Classify.vue';
   export default {
     components: {
-      HomeNav,
-      HomeSwiper,
-      HomeGift,
-      HomeManufacturer,
-      HomePopular
+      Nav,
+      Swiper,
+      Gift,
+      Manufacturer,
+      Popular,
+      Recommend,
+      FlashSale,
+      NewProducts,
+      Classify
     },
     mounted () {
       this.$nextTick(() => {
         this.$refs.swiper._initSwiper();
+        this.$store.dispatch('getHomeData');
       });
     }
   }
