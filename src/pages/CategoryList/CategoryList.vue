@@ -6,50 +6,47 @@
     </div>
     <section class="categoryList-main">
       <div class="line"></div>
-      <ul class="categoryList-left">
-        <li :class="{active: currentIndex === index}" v-for="(category, index) in filterCategoryList" :key="index" @click="toggleActive(index)">
-          <a href="javascript:void(0);">{{category.name}}</a>
-        </li>
-      </ul>
-      <router-view :filterCategoryList="filterCategoryList"/>
+      <div class="categoryList-left">
+        <ul>
+          <li :class="{active: currentId * 1 === category.id}" v-for="(category, index) in categoryList" :key="index">
+            <router-link :to="{path: 'category', query: {id: category.id}}">{{category.name}}</router-link>
+          </li>
+        </ul>
+      </div>
+      <router-view />
     </section>
     <Footer />
   </div>
 </template>
 <script>
   import {mapState} from 'vuex';
-  import Category from './Category/Category.vue';
+  import BScroll from 'better-scroll';
   export default {
     data () {
       return {
-        isActive: true
+        isActive: true,
+        currentId: ''
       }
     },
     computed: {
       ...mapState({
-        categoryList: state => state.categoryList.categoryList,
-        currentIndex: state => state.categoryList.currentIndex
-      }),
-      filterCategoryList () {
-        return this.categoryList.filter((category, index) => (index + 1) % 5 !== 0)
-      }
+        categoryList: state => state.categoryList.categoryList
+      })
     },
     mounted () {
       this.$store.dispatch('getCategoryList');
+      this.currentId = this.$route.query.id ? this.$route.query.id : '1022001';
+      this.$nextTick(() => {
+        /* eslint-disable no-new */
+        new BScroll('.categoryList-left', {
+          click: true
+        })
+      })
     },
-    methods: {
-      toggleActive (index) {
-        this.$store.dispatch('updateIndex', index);
-        this.$router.replace({
-          url: '/categoryList/category',
-          query: {
-            index
-          }
-        });
+    watch: {
+      $route () {
+        this.currentId = this.$route.query.id;
       }
-    },
-    components: {
-      Category
     }
   }
 </script>
@@ -75,21 +72,27 @@
       height 2px
       background-color #eee
     .categoryList-main
-      display flex
+        position relative
       .categoryList-left
-        flex 3
-        display flex
-        flex-direction column
-        li
-          width 160px
-          height 50px
-          line-height 50px
-          text-align center
-          font-size 28px
-          margin 20px 0
-          border-left 6px solid #fff
-          &.active
-            border-left 6px solid $red
-            a
-              color $red
+        position absolute
+        top 0
+        left 0
+        height 100%
+        padding 20px 0
+        ul
+          width 162px
+          display flex
+          flex-direction column
+          li
+            width 160px
+            height 50px
+            line-height 50px
+            text-align center
+            font-size 28px
+            margin 15px 0
+            border-left 6px solid #fff
+            &.active
+              border-left 6px solid $red
+              a
+                color $red
 </style>

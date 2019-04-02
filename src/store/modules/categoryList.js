@@ -4,8 +4,7 @@
 import {reqCategoryList} from '../../api';
 
 import {
-  UPDATE_CATEGORIES,
-  UPDATE_INDEX
+  RECEIVE_CATEGORIES
 } from '../mutation-types';
 
 const state = {
@@ -13,11 +12,8 @@ const state = {
   currentIndex: 0 // 当前选中的下标
 };
 const mutations = {
-  [UPDATE_CATEGORIES] (state, categoryList) {
+  [RECEIVE_CATEGORIES] (state, categoryList) {
     state.categoryList = categoryList;
-  },
-  [UPDATE_INDEX] (state, index) {
-    state.currentIndex = index;
   }
 };
 const actions = {
@@ -25,13 +21,10 @@ const actions = {
   async getCategoryList ({commit}) {
     const result = await reqCategoryList();
     if (result.code === 0) {
-      commit(UPDATE_CATEGORIES, result.data);
+      commit(RECEIVE_CATEGORIES, result.data.categoryL1List);
     } else {
       console.log('获取数据失败');
     }
-  },
-  updateIndex ({commit}, index) {
-    commit(UPDATE_INDEX, index)
   }
 };
 const getters = {

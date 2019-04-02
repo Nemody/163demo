@@ -1,74 +1,57 @@
 <template>
   <div class="category-container">
-    <img class="category-bigImg" :src="categories.bannerUrl" alt="居家生活大图">
-    <div v-for="(subCateList, index) in categories.subCateList" :key="index">
-      <p>{{subCateList.name}}</p>
-      <div class="line"></div>
-      <ul v-if="subCateList">
-        <li v-for="(category, index) in subCateList.subCateList" :key="index">
-          <img :src="category.wapBannerUrl" :alt="category.name">
+    <img class="category-bigImg" :src="categories.bannerUrl" alt="居家生活大图" v-if="categories">
+      <ul v-if="categories">
+        <li v-for="(category, index) in categories.subCateList" :key="index">
+          <img :src="category.bannerUrl" :alt="category.name">
           <span>{{category.name}}</span>
         </li>
       </ul>
     </div>
-  </div>
 </template>
 <script>
   import {mapState} from 'vuex';
   export default{
     data () {
       return {
-        categories: []
+        categories: [],
+        categoryId: ''
       }
-    },
-    props: {
-      filterCategoryList: Array
     },
     computed: {
       ...mapState({
-        currentIndex: state => state.categoryList.currentIndex
+        categoryList: state => state.categoryList.categoryList
       })
     },
     mounted () {
-      this.categories = this.filterCategoryList[this.currentIndex];
+      this.categoryId = this.$route.query.id ? this.$route.query.id : '1022001';
+      this.categories = this.categoryList.find(item => item.id === this.categoryId * 1);
     },
     watch: {
-      currentIndex () {
-        this.categories = this.filterCategoryList[this.currentIndex];
+      $route () {
+        this.categoryId = this.$route.query.id;
+        this.categories = this.categoryList.find(item => item.id === this.categoryId * 1);
       }
-    /*
-    filterCategoryList () {
-      const index = this.currentIndex;
-      this.categories = this.filterCategoryList[index];
-    }
-    */
     }
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../common/stylus/mixins.styl";
   .category-container
-    padding 0 20px
+    margin-left 162px
+    padding 30px 30px 21px
     .category-bigImg
       width 528px
       height 192px
       margin-bottom 30px
-    p
-      font-size 30px
-      font-weight bold
-      height 50px
-      line-height 50px
-      padding 0 0 5px
-    .line
-      width 100%
-      height 2px
-      background-color #eee
     ul
-      clearFix()
+      display flex
+      flex-wrap wrap
+      width 100%
       li
-        float left
-        margin 10px 30px 20px 0
         text-align center
+        width 144px
+        margin-right 30px
         img
           width 144px
           height 144px
