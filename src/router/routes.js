@@ -7,6 +7,9 @@ import Recommend from '../pages/Recommend/Recommend.vue';
 import ShopCart from '../pages/ShopCart/ShopCart.vue';
 import Profile from '../pages/Profile/Profile.vue';
 import Category from '../pages/CategoryList/Category/Category.vue';
+import RecoFind from '../pages/Recommend/RecoFind/RecoFind.vue';
+import RecoSelect from '../pages/Recommend/RecoSelect/RecoFind.vue';
+
 export default [
   {
     path: '/home',
@@ -28,7 +31,21 @@ export default [
   },
   {
     path: '/recommend',
-    component: Recommend
+    component: Recommend,
+    children: [
+      {
+        path: '/recommend/find',
+        component: RecoFind
+      },
+      {
+        path: '/recommend/select',
+        component: RecoSelect
+      },
+      {
+        path: '',
+        redirect: '/recommend/find'
+      }
+    ]
   },
   {
     path: '/shopcart',

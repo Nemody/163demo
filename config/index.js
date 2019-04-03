@@ -10,8 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
+    proxyTable: {
+      '/api': { // 匹配所有以 '/api'开头的请求路径
+        target: 'http://m.you.163.com', // 代理目标的基础路径
+        changeOrigin: true, // 支持跨域
+        pathRewrite: {// 重写路径: 去掉路径中开头的'/api'
+          '^/api': ''
+        }
+      }
+    },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
@@ -73,4 +80,4 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   }
-}
+};

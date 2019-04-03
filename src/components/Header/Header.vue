@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <header class="header-container">
     <div class="header-search-login">
       <span class="logo"></span>
       <div class="searchInput">
@@ -29,7 +29,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </header>
 </template>
 <script>
   import {mapState} from 'vuex';

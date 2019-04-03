@@ -7,6 +7,7 @@ import actions from './actions';
 import getters from './getters';
 import home from './modules/home';
 import categoryList from './modules/categoryList';
+import recommend from './modules/recommend';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     home,
-    categoryList
+    categoryList,
+    recommend
   }
 })
