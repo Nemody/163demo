@@ -23,4 +23,4 @@ export const reqAutoRecommendData = (page, size, exceptIds = '6409,6201,6408,641
 export const reqOrderShowTop = (id) => ajax(`${prefix}/topic/v1/look/getCollection.json`, {id});
 
 // 识物-晒单 评价数据 ---- http://m.you.163.com/topic/v1/look/getList.json?id=9&size=2&type=1|2|3
-export const reqOrderShowRatings = ({page, size, type}) => ajax(`${prefix}/topic/v1/look/getList.json`, {page, size, type});
+export const reqOrderShowRatings = (page, size, type) => ajax(`${prefix}/topic/v1/look/getList.json`, {page, size, type});

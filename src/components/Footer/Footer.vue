@@ -12,7 +12,7 @@
       </div>
       <span>分类</span>
     </li>
-    <li :class="{active: $route.path === '/recommend'}" @click="goto('/recommend')">
+    <li :class="{active: $route.path === '/recommend' || $route.path.indexOf('/recommend') !== -1}" @click="goto('/recommend')">
       <div class="footer-icon">
         <img src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/tabBar-s43a0dc8a7d-de25ef8e19.png" alt="icon">
       </div>

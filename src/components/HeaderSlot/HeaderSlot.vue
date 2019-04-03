@@ -10,7 +10,9 @@
     </header>
     <div class="reco-nav" v-if="recommendTabs">
       <ul class="ul-node">
-        <li :class="{active: currentIndex === index}" v-for="(tab, index) in recommendTabs" :key="tab.tabId" @click="toggleActive(index)">{{tab.tabName}}</li>
+        <li :class="{active: tabIndex * 1 === index}" v-for="(tab, index) in recommendTabs" :key="tab.tabId">
+          <router-link :to="{path: '/recommend/find', query: {tabIndex: index}}">{{tab.tabName}}</router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -19,19 +21,18 @@
   import {mapState} from 'vuex';
   import BScroll from 'better-scroll';
   export default {
-    data () {
-      return {
-        currentIndex: 0
-      }
-    },
     mounted () {
       this.$store.dispatch('getRecommendTabs');
       this._setUlWidth();
       this._initScroll();
+      if (!this.$route.query.tabIndex) {
+        this.$store.dispatch('updateTabIndex', 0);
+      }
     },
     computed: {
       ...mapState({
-        recommendTabs: state => state.recommend.recommendTabs
+        recommendTabs: state => state.recommend.recommendTabs,
+        tabIndex: state => state.recommend.tabIndex
       })
     },
     methods: {
@@ -47,15 +48,17 @@
           ul.style.width = ulWidth + 'px';
         });
       },
-      toggleActive (index) {
-        this.currentIndex = index;
-      },
       _initScroll () {
         /* eslint-disable no-new */
         new BScroll('.reco-nav', {
           click: true,
           scrollX: true
         })
+      }
+    },
+    watch: {
+      $route () {
+        this.$store.dispatch('updateTabIndex', this.$route.query.tabIndex);
       }
     }
   }

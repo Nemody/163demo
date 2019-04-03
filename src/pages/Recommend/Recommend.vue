@@ -47,7 +47,8 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl";
-  .reco-container
+    .reco-container
+      padding-bottom 100px
       .reco-header
         display flex
         justify-content space-between

@@ -8,7 +8,7 @@ import ShopCart from '../pages/ShopCart/ShopCart.vue';
 import Profile from '../pages/Profile/Profile.vue';
 import Category from '../pages/CategoryList/Category/Category.vue';
 import RecoFind from '../pages/Recommend/RecoFind/RecoFind.vue';
-import RecoSelect from '../pages/Recommend/RecoSelect/RecoFind.vue';
+import RecoSelect from '../pages/Recommend/RecoSelect/RecoSelect.vue';
 
 export default [
   {

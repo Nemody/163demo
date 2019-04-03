@@ -24,8 +24,10 @@
       })
     },
     mounted () {
-      this.categoryId = this.$route.query.id ? this.$route.query.id : '1022001';
-      this.categories = this.categoryList.find(item => item.id === this.categoryId * 1);
+      this.$nextTick(() => {
+        this.categoryId = this.$route.query.id ? this.$route.query.id : '1022001';
+        this.categories = this.categoryList.find(item => item.id === this.categoryId * 1);
+      })
     },
     watch: {
       $route () {

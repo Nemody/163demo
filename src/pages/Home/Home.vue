@@ -1,39 +1,45 @@
 <template>
   <div class="home-container">
     <Header/>  <!--头部-->
-    <Swiper ref="swiper"/>  <!--轮播图部分-->
-    <ul class="wangyi-grow">
-      <li>
-        <i class="grow-icon"></i>
-        <span>网易自营品牌</span>
-      </li>
-      <li>
-        <i class="grow-icon"></i>
-        <span>30天无忧退货</span>
-      </li>
-      <li>
-        <i class="grow-icon"></i>
-        <span>48小时快速退款</span>
-      </li>
-    </ul>
-    <Nav />   <!--首页主导航区-->
-    <Gift />  <!--首页福利区-->
-    <Split />
-    <Manufacturer /> <!--首页品牌制造商区-->
-    <Split />
-    <Popular /> <!--首页热销榜单区-->
-    <Split />
-    <Recommend />
-    <Split />
-    <FlashSale />
-    <Split />
-    <NewProducts />
-    <Split />
-    <Classify />
+    <div class="home-main">
+      <div>
+        <Swiper ref="swiper"/>  <!--轮播图部分-->
+        <ul class="wangyi-grow">
+          <li>
+            <i class="grow-icon"></i>
+            <span>网易自营品牌</span>
+          </li>
+          <li>
+            <i class="grow-icon"></i>
+            <span>30天无忧退货</span>
+          </li>
+          <li>
+            <i class="grow-icon"></i>
+            <span>48小时快速退款</span>
+          </li>
+        </ul>
+        <Nav />   <!--首页主导航区-->
+        <Gift />  <!--首页福利区-->
+        <Split />
+        <Manufacturer /> <!--首页品牌制造商区-->
+        <Split />
+        <Popular /> <!--首页热销榜单区-->
+        <Split />
+        <Recommend />
+        <Split />
+        <FlashSale />
+        <Split />
+        <NewProducts />
+        <Split />
+        <Classify />
+      </div>
+    </div>
     <Footer />   <!--底部导航区-->
   </div>
 </template>
 <script>
+  import BScroll from 'better-scroll';
+
   import Swiper from './components/Swiper/Swiper.vue';
   import Nav from './components/Nav/Nav.vue';
   import Gift from './components/Gift/Gift.vue';
@@ -57,38 +63,47 @@
     },
     mounted () {
       this.$nextTick(() => {
+        const height = document.documentElement.clientHeight;
+        const recoFindMain = document.querySelector('.home-main');
+        recoFindMain.style.height = height + 'px';
         this.$refs.swiper._initSwiper();
         this.$store.dispatch('getHomeData');
+        /* eslint-disable no-new */
+        if (!this.classScroll) {
+          this.classScroll = new BScroll('.home-main', {
+            click: true
+          })
+        }
       });
     }
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
     .home-container
-      min-height 100%
       padding-bottom 100px
-      .wangyi-grow
-        display flex
-        justify-content space-around
-        align-items center
-        height 72px
-        li
+      .home-main
+        .wangyi-grow
           display flex
-          &:nth-of-type(1)
-            i
+          justify-content space-around
+          align-items center
+          height 72px
+          li
+            display flex
+            &:nth-of-type(1)
+              i
+                background-image url("http://yanxuan.nosdn.127.net/a03dd909803b9ac032eba58b7253a2f6.png")
+            &:nth-of-type(2)
+              i
+                background-image url("http://yanxuan.nosdn.127.net/2d0402ffcd52b3ec3b07422681c42a89.png")
+            &:nth-of-type(3)
+              i
+                background-image url("http://yanxuan.nosdn.127.net/eb61ee48e8942dbd1784c9ee75ebe955.png")
+            .grow-icon
+              width 32px
+              height 32px
               background-image url("http://yanxuan.nosdn.127.net/a03dd909803b9ac032eba58b7253a2f6.png")
-          &:nth-of-type(2)
-            i
-              background-image url("http://yanxuan.nosdn.127.net/2d0402ffcd52b3ec3b07422681c42a89.png")
-          &:nth-of-type(3)
-            i
-              background-image url("http://yanxuan.nosdn.127.net/eb61ee48e8942dbd1784c9ee75ebe955.png")
-          .grow-icon
-            width 32px
-            height 32px
-            background-image url("http://yanxuan.nosdn.127.net/a03dd909803b9ac032eba58b7253a2f6.png")
-            background-size 32px 32px
-            background-repeat no-repeat
-            background-position center
-            margin 0 10px 0 0
+              background-size 32px 32px
+              background-repeat no-repeat
+              background-position center
+              margin 0 10px 0 0
 </style>
