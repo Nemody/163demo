@@ -1,5 +1,8 @@
 <template>
-  <router-view/>
+  <div class="app-container">
+    <router-view/>
+    <Footer v-show="$route.meta.isShow"/>
+  </div>
 </template>
 <script>
   import Home from './pages/Home/Home.vue';
@@ -28,5 +31,6 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-
+  .app-container
+    height 100%
 </style>

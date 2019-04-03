@@ -15,7 +15,6 @@
       </div>
       <router-view />
     </section>
-    <Footer />
   </div>
 </template>
 <script>

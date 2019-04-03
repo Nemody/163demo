@@ -34,7 +34,6 @@
         <Classify />
       </div>
     </div>
-    <Footer />   <!--底部导航区-->
   </div>
 </template>
 <script>

@@ -82,9 +82,11 @@
     },
     mounted () {
       this.$nextTick(() => {
+        // 页面显示完成后设置将要实现scroll滚动效果的元素的父元素的高度，使子元素高度超出父元素才能实现滚动
         const height = document.documentElement.clientHeight;
         const recoPage = document.querySelector('.reco-page');
         recoPage.style.height = height + 'px';
+        // 实现滚动
         this._initScroll();
       })
     },
@@ -101,6 +103,7 @@
       }
     },
     methods: {
+      // 可以上拉刷新的初始化scroll方法
       _initScroll () {
         if (this.recoScroll) {
           this.recoScroll.refresh();

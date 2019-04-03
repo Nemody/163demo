@@ -1,16 +1,16 @@
 <template>
   <div>
     <header class="header-slot" slot="headerSlot">
-      <span class="home-icon"></span>
+      <span class="home-icon" @click="$router.replace('/home')"></span>
       <slot name="headerTitle"></slot>
       <div class="search-cart-icon">
         <span></span>
-        <span></span>
+        <span @click="$router.push('/shopcart')"></span>
       </div>
     </header>
-    <div class="reco-nav" v-if="recommendTabs">
+    <div class="reco-nav" v-if="$route.path.indexOf('recommend') !== -1">
       <ul class="ul-node">
-        <li :class="{active: tabIndex * 1 === index}" v-for="(tab, index) in recommendTabs" :key="tab.tabId">
+        <li  :class="{active: tabIndex * 1 === index}" v-for="(tab, index) in recommendTabs" :key="tab.tabId">
           <router-link :to="{path: '/recommend/find', query: {tabIndex: index}}">{{tab.tabName}}</router-link>
         </li>
       </ul>
@@ -22,11 +22,14 @@
   import BScroll from 'better-scroll';
   export default {
     mounted () {
-      this.$store.dispatch('getRecommendTabs');
-      this._setUlWidth();
-      this._initScroll();
-      if (!this.$route.query.tabIndex) {
-        this.$store.dispatch('updateTabIndex', 0);
+      if (this.$route.path.indexOf('recommend') !== -1) {
+        this.$store.dispatch('getRecommendTabs');
+        this._setUlWidth();
+        this._initScroll();
+        // 实现从其他组件切换时初始显示为推荐页的功能
+        if (!this.$route.query.tabIndex) {
+          this.$store.dispatch('updateTabIndex', 0);
+        }
       }
     },
     computed: {
@@ -36,6 +39,7 @@
       })
     },
     methods: {
+      // 实现导航区域的水平滑动
       _setUlWidth () {
         const uls = document.querySelectorAll('.ul-node');
         let ulWidth;
@@ -56,9 +60,12 @@
         })
       }
     },
+    // 监视$route。query.tabIndex的变化，更新state中的tabIndex
     watch: {
       $route () {
-        this.$store.dispatch('updateTabIndex', this.$route.query.tabIndex);
+        if (this.$route.query.tabIndex) {
+          this.$store.dispatch('updateTabIndex', this.$route.query.tabIndex);
+        }
       }
     }
   }

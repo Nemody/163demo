@@ -1,5 +1,5 @@
 <template>
-  <div class="reco-container" @scrollToEnd="getAutoRecommends">
+  <div class="reco-container">
     <HeaderSlot>
       <div class="header-title" slot="headerTitle">
         <span :class="{on:  isOn}" @click="gotoFindOrSelect(true)">发现</span>
@@ -7,7 +7,6 @@
       </div>
     </HeaderSlot>
     <router-view />
-    <Footer />
   </div>
 </template>
 <script>
@@ -19,14 +18,9 @@
       }
     },
     mounted () {
+      // 识物页面初始显示时即请求数据,为路由组件使用数据做准备
       this.$store.dispatch('getRecommendTabs');
       this.$store.dispatch('getRecommends');
-    },
-    computed: {
-      ...mapState({
-        recommendTabs: state => state.recommend.recommendTabs,
-        recommends: state => state.recommend.recommends
-      })
     },
     methods: {
       gotoFindOrSelect (isGoToFind) {
@@ -38,9 +32,6 @@
           // 跳转到select--甄选页面
           this.$router.push('/recommend/select');
         }
-      },
-      getAutoRecommends () {
-        this.$store.dispatch('getAutoRecommends',this.moreDataPage, 5);
       }
     }
   }
