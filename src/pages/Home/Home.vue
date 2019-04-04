@@ -2,7 +2,8 @@
   <div class="home-container">
     <Header/>  <!--头部-->
     <div class="home-main">
-      <div>
+      <!--加一padding解决scroll回弹下落页面显示不完整的问题-->
+      <div style="padding-bottom: 260px">
         <Swiper ref="swiper"/>  <!--轮播图部分-->
         <ul class="wangyi-grow">
           <li>
