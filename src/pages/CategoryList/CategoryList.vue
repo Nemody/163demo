@@ -2,7 +2,7 @@
   <div class="categoryList-container">
     <div class="searchInput">
       <i class="iconfont icon-search"></i>
-      <span class="placeholder">搜索商品，共xxxxx款好物</span>
+      <span class="placeholder" @click="$router.push('/search')">搜索商品，共xxxxx款好物</span>
     </div>
     <section class="categoryList-main">
       <div class="line"></div>
@@ -52,6 +52,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl";
   .categoryList-container
+    height 100%
     padding-bottom 100px
     .searchInput
       height 56px
@@ -71,6 +72,7 @@
       height 2px
       background-color #eee
     .categoryList-main
+        height 100%
         position relative
       .categoryList-left
         position absolute

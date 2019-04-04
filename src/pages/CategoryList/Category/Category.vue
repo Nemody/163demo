@@ -24,14 +24,14 @@
       })
     },
     mounted () {
-      this.$nextTick(() => {
-        this.categoryId = this.$route.query.id ? this.$route.query.id : '1022001';
-        this.categories = this.categoryList.find(item => item.id === this.categoryId * 1);
-      })
+      this.categoryId = this.$route.query.id ? this.$route.query.id : '1022001';
     },
     watch: {
       $route () {
         this.categoryId = this.$route.query.id;
+        this.categories = this.categoryList.find(item => item.id === this.categoryId * 1);
+      },
+      categoryList () {
         this.categories = this.categoryList.find(item => item.id === this.categoryId * 1);
       }
     }
@@ -40,6 +40,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../common/stylus/mixins.styl";
   .category-container
+    height 100%
     margin-left 162px
     padding 30px 30px 21px
     .category-bigImg

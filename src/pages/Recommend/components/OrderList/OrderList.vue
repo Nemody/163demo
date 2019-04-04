@@ -125,15 +125,19 @@
       }),
       // 计算得到下标为奇数的评论数据
       getOddRatings () {
-        const filterOddData = this.orderShowRatings.topicList.filter((item, index) => index % 2 ===1);
-        this.oddRatingsData.push(...filterOddData);
-        return this.oddRatingsData;
+        if (this.orderShowRatings.topicList) {
+          const filterOddData = this.orderShowRatings.topicList.filter((item, index) => index % 2 === 1);
+          this.oddRatingsData.push(...filterOddData);
+          return this.oddRatingsData;
+        }
       },
       // 计算得到下标为偶数的评论数据
       getEvenRatings () {
-        const filterEvenData = this.orderShowRatings.topicList.filter((item, index) => index % 2 ===0);
-        this.evenRatingsData.push(...filterEvenData);
-        return this.evenRatingsData;
+        if (this.orderShowRatings.topicList) {
+          const filterEvenData = this.orderShowRatings.topicList.filter((item, index) => index % 2 === 0);
+          this.evenRatingsData.push(...filterEvenData);
+          return this.evenRatingsData;
+        }
       }
     },
     methods: {
@@ -170,7 +174,7 @@
         const ulNode = this.$refs.topUlNode;
         const lis = ulNode.querySelectorAll('li');
         Array.from(lis).forEach((li) => {
-          width = li.clientWidth * lis.length + 20 * (lis.length-1);
+          width = li.clientWidth * lis.length + 20 * (lis.length - 1);
         });
         ulNode.style.width = width + 'px';
       }
@@ -249,26 +253,29 @@
               border-radius 10px
               background-color #f4f4f4
         .rating-content
+          padding 0 5px
+          box-sizing border-box
           display flex
           justify-content space-around
           .content-left, .content-right
+            width 45%
             clearFix()
             li
-              width 345px
+              width 100%
               margin-bottom 20px
               border 1px solid #999
               border-radius 20px
               img
                 &.big-size
-                  width 345px
+                  width 100%
                   height 460px
                   border-radius 20px 20px 0 0
                 &.middle-size
-                  width 345px
+                  width 100%
                   height 345px
                   border-radius 20px 20px 0 0
                 &.small-size
-                  width 345px
+                  width 100%
                   height 260px
                   border-radius 20px 20px 0 0
               .rate-content

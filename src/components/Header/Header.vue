@@ -2,11 +2,11 @@
   <header class="header-container">
     <div class="header-search-login">
       <span class="logo"></span>
-      <div class="searchInput">
+      <div class="searchInput" @click="$router.push('/search')">
         <i class="iconfont icon-search"></i>
         <span class="placeholder">搜索商品，共xxxxx款好物</span>
       </div>
-      <button>登录</button>
+      <button @click="$router.push('/profile')">登录</button>
     </div>
     <div class="header-nav" v-if="isOpen">
       <ul class="header-nav-left">
@@ -17,17 +17,20 @@
       </ul>
       <span class="iconfont icon-54 header-nav-arrow" @click="toggleShow"></span>
     </div>
-    <div class="header-nav-box" v-if="!isOpen">
-      <div class="all-category">
-        <span>全部频道</span>
-        <i class="iconfont icon-53" @click="toggleShow"></i>
+    <div v-if="!isOpen" class="navbox-wrapper">
+      <div class="nav-box">
+        <div class="all-category">
+          <span>全部频道</span>
+          <i class="iconfont icon-53" @click="toggleShow"></i>
+        </div>
+        <ul>
+          <li :class="{on: activeIndex === recoIndex}" :data-index="filterNavList.length" ref="recoLi" @click="toggleActive()"><a href="javascript:void(0);">推荐</a></li>
+          <li :class="{on: activeIndex === index}" v-for="(nav, index) in filterNavList" :key="index" @click="toggleActive(index)">
+            <a href="javascript:void(0);">{{nav.text}}</a>
+          </li>
+        </ul>
+        <div class="mask"></div>
       </div>
-      <ul>
-        <li :class="{on: activeIndex === recoIndex}" :data-index="filterNavList.length" ref="recoLi" @click="toggleActive()"><a href="javascript:void(0);">推荐</a></li>
-        <li :class="{on: activeIndex === index}" v-for="(nav, index) in filterNavList" :key="index" @click="toggleActive(index)">
-          <a href="javascript:void(0);">{{nav.text}}</a>
-        </li>
-      </ul>
     </div>
   </header>
 </template>
@@ -158,44 +161,50 @@
         text-align center
         line-height 60px
         background-color #fff
-    .header-nav-box
-      position absolute
-      left 0
-      top 90px
-      width 100%
-      z-index 10
-      background-color #fff
-      .all-category
-        display flex
-        justify-content space-between
-        /*position relative*/
-        font-size 30px
-        height 60px
-        line-height 60px
-        margin 0 0 20px
-        text-align center
-        span
-          margin-left 30px
-        i
-          width 100px
-          height 60px
-          font-size 30px
-      ul
-        clearFix()
+    .navbox-wrapper
+      .nav-box
+        position absolute
+        left 0
+        top 90px
         width 100%
-        font-size 24px
-        text-align center
-        box-sizing border-box
-        li
-          float left
-          width 150px
-          height 56px
+        z-index 10
+        background-color #fff
+        .all-category
+          display flex
+          justify-content space-between
+          /*position relative*/
+          font-size 30px
+          height 60px
+          line-height 60px
+          margin 0 0 20px
           text-align center
-          line-height 56px
-          border-radius 5px
-          margin 0 0 40px 30px
-          background-color #FAFAFA
+          span
+            margin-left 30px
+          i
+            width 100px
+            height 60px
+            font-size 30px
+        ul
+          clearFix()
+          width 100%
+          font-size 24px
+          text-align center
           box-sizing border-box
-          &.on
-            border 1px solid $red
+          li
+            float left
+            width 150px
+            height 56px
+            text-align center
+            line-height 56px
+            border-radius 5px
+            margin 0 0 40px 30px
+            background-color #FAFAFA
+            box-sizing border-box
+            &.on
+              border 1px solid $red
+
+      .mask
+        width 100%
+        height 100%
+        background-color rgba(0, 0, 0, .5)
 </style>

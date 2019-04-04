@@ -6,7 +6,6 @@ import 'lib-flexible/flexible';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-
 import './mock/mock-server';
 
 import Footer from './components/Footer/Footer.vue';
@@ -18,6 +17,7 @@ Vue.component('Footer', Footer);
 Vue.component('Header', Header);
 Vue.component('Split', Split);
 Vue.component('HeaderSlot', HeaderSlot);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

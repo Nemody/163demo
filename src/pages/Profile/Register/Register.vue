@@ -1,10 +1,23 @@
 <template>
   <section class="register-container">
     <div class="regis-title">
-      <span>邮箱账号注册</span>
+      <span>{{$route.query.isPhoneRegis ? '手机号注册' : '邮箱账号注册'}}</span>
     </div>
-    <div class="regis-main">
-      <div class="phonenum">
+    <div class="phone-regis" v-show="$route.query.isPhoneRegis">
+      <div class="phone">
+        <input type="text" placeholder="请输入手机号">
+      </div>
+      <div class="code">
+        <input class="msg-code" type="text" placeholder="请输入短信验证码">
+        <button class="get-code">获取验证码</button>
+      </div>
+      <div class="pwd">
+        <input type="password" placeholder="请输入密码">
+      </div>
+      <button class="register" disabled>注册</button>
+    </div>
+    <div class="email-regis" v-show="!$route.query.isPhoneRegis">
+      <div class="email">
         <input type="text" placeholder="邮箱账号">
       </div>
       <div class="pwd">
@@ -16,7 +29,9 @@
       <button class="register" disabled>注册</button>
     </div>
     <div class="toash-info">
-      <input type="checkbox">
+      <span class="select" :class="{selected: isSelect}" @click="isSelect = !isSelect">
+        <input type="checkbox">
+      </span>
       <div class="text">
         <span>我同意</span>
         <a href="iavascript:void(0);">《网易服务条款》</a>
@@ -24,10 +39,22 @@
         <a href="iavascript:void(0);">《网易隐私政策》</a>
       </div>
     </div>
+    <div class="email-register"
+         @click="$router.replace({path: '/profile/register', query: {isPhoneRegis: false}})"
+         v-show="$route.query.isPhoneRegis"
+    >
+      <span>邮箱账号注册</span>
+      <i class="iconfont icon-52"></i>
+    </div>
   </section>
 </template>
 <script>
   export default {
+    data () {
+      return {
+        isSelect: true
+      }
+    },
     props: {
       setIsShow: Function
     },
@@ -51,9 +78,9 @@
       span
         font-size 36px
         color #333
-    .regis-main
+    .phone-regis, .email-regis
       padding-top 120px
-      .phonenum, .pwd, .confirm-pwd
+      .phone, .code, .pwd, .email, .confirm-pwd
         width 670px
         height 90px
         border-bottom 1px solid #ddd
@@ -64,7 +91,8 @@
           margin 28px 0
           font-size 28px
           color #666
-          border none
+          border 1px solid rgba(0,0,0,0)
+          outline none
         button
           float right
           width 168px
@@ -89,13 +117,20 @@
       display flex
       align-items center
       margin-top 30px
+      .select
+        width 28px
+        height 28px
+        margin-right 10px
+        border 1px solid #7f7f7f
+        &.selected
+          background-image url("https://urswebzj.nosdn.127.net/webzj_cdn101/sprite_61fbe151ab715649c6b7c4ec39156201.png")
+          background-repeat no-repeat
+          background-position -323px -86px
       input
         width 40px
         height 40px
         outline none
-        border 1px solid #333
-        background-color #fff
-        margin-right 10px
+        visibility hidden
       .text
         a
           color #007AFF

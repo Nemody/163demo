@@ -10,13 +10,15 @@
   import Recommend from './pages/Recommend/Recommend.vue';
   import ShopCart from './pages/ShopCart/ShopCart.vue';
   import Profile from './pages/Profile/Profile.vue';
+  import Search from './pages/Search/Search.vue';
   export default {
     components: {
       Home,
       Category,
       Recommend,
       ShopCart,
-      Profile
+      Profile,
+      Search
     },
     created () {
       // 在页面加载时读取sessionStorage里的状态信息

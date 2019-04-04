@@ -10,6 +10,6 @@ Vue.use(VueRouter);
 
 /* eslint-disable no-new */
 export default new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   routes
 })

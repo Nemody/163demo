@@ -8,6 +8,7 @@ import getters from './getters';
 import home from './modules/home';
 import categoryList from './modules/categoryList';
 import recommend from './modules/recommend';
+import search from './modules/search';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     home,
     categoryList,
-    recommend
+    recommend,
+    search
   }
 })

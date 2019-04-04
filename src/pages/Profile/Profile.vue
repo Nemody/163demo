@@ -8,15 +8,15 @@
        <img src="http://yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="logo">
      </div>
      <div class="login-methods">
-       <div class="phone-login" :class="{active: isActive}" @click="gotoLogin('/profile/phonelogin')">
+       <div class="phone-login" :class="{active: isActive}" @click="gotoLogin('/profile/login', true)">
          <i class="iconfont icon-phone"></i>
          <span>手机号码登录</span>
        </div>
-       <div class="email-login" :class="{active: !isActive}" @click="gotoLogin('/profile/emaillogin')">
+       <div class="email-login" :class="{active: !isActive}" @click="gotoLogin('/profile/login', false)">
          <i class="iconfont icon-email"></i>
          <span>邮箱账号登录</span>
        </div>
-       <div class="quick-login" @click="gotoLogin('/profile/phoneregister')">
+       <div class="quick-login" @click="gotoRegis('/profile/register', true)">
          <span>手机号快捷注册</span>
          <i class="iconfont icon-52"></i>
        </div>
@@ -36,7 +36,7 @@
        </div>
      </div>
    </div>
-  <router-view :setIsShow="setIsShow" />
+  <router-view :setIsShow="setIsShow"/>
   </section>
 </template>
 <script>
@@ -48,14 +48,18 @@
       }
     },
     methods: {
-      gotoLogin (path) {
+      gotoLogin (path, isPhoneLogin) {
         this.isShow = false;
         this.isActive = !this.isActive;
-        this.$router.push(path);
+        this.$router.replace({path, query: {isPhoneLogin}});
       },
       setIsShow () {
         this.isActive = true;
         this.isShow = true;
+      },
+      gotoRegis (path, isPhoneRegis) {
+        this.isShow = false;
+        this.$router.replace({path, query: {isPhoneRegis}})
       }
     }
   }
@@ -76,8 +80,7 @@
           width 268px
           height 90px
       .login-methods
-        padding 0 40px
-        margin 0 0 205px 0
+        padding 0 40px 380px
         .phone-login, .email-login
           display flex
           align-items center
@@ -108,7 +111,6 @@
         align-items baseline
         height 40px
         font-size 28px
-        margin-top 380px
         .login-wechat, .login-qq, .login-weibo
           float left
           display flex

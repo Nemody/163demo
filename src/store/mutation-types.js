@@ -14,3 +14,4 @@ export const RECEIVE_RECOMMENDS = 'receive_recommends';
 export const RECEIVE_AUTORECOMMENDS = 'receive_autorecommends';
 export const RECEIVE_ORDERSHOWTOP = 'receive_ordershowtop';
 export const RECEIVE_ORDERSHOWRATINGS = 'receive_ordershowratings';
+export const RECEIVE_INITSEARCH = 'receive_initsearch';
